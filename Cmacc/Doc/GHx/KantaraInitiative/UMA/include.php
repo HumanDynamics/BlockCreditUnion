@@ -1,0 +1,1 @@
+This is a modular form of the 2013 UMA draft.  Just playing around, not official, approved, reviewed or otherwise validated.  Each clause is separately stated and can be versioned in git and on GitHub.
