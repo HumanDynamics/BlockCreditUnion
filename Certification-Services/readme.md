@@ -8,4 +8,4 @@ http://www.ecfr.gov/cgi-bin/text-idx?SID=161a0dee2114b6386aaf656347e97276&mc=tru
 # Available Open Source external certificate generators
 * https://www.ejbca.org/
 * https://letsencrypt.org/how-it-works/
-* http://simpleauthority.com/\
+* http://simpleauthority.com/
