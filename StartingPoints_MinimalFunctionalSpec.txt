@@ -1,0 +1,193 @@
+/**
+	Brenden C. Maher
+	Thu May 12 18:27:58 EDT 2016
+**/
+StartingPoints_MinimalFunctionalSpec
+
+
+StartingPoints:
+The idea here is to explore what are the most basic things we would need to do a blockchain Certification services such as certification of electronic signatures. 
+This is light weight and to be taken with a grain of salt. The idea here is not so much as to be a "real functional spec" but one to explore what the minimum we might do to get started.
+
+Dazza, Adiano and I talked about set up a Certification services such as certification of electronic signatures.
+I think also think this is a great place to start....
+
+It serves the purpose of getting something useful running an building the CU, around it.
+
+So we get the Certificate Authority Running and then look at Governance Functionality of a CU. 
+I am looking into-
+
+https://letsencrypt.org/getting-started/ 
+
+They have: founding sponsors Cisco and Akamai have renewed their Platinum sponsorships with 3-year commitment
+
+I am working on getting that running.
+
+
+After we have something that can give out certificates etc. we should look an mimimal functionality for CU in terms of governance-
+(what minimal stuff do we need) to that end I have pulled some stuff from the .gov website.
+
+
+
+FunctionalSpec-
+
+Looking at the CU spec from www.ncua.gov it seems that there are a lot of rules. This is true even for setting up governance. 
+
+My conclusion is that any thing we do at this point WILL NOT be "a real implementation that would pass muster with regulators". 
+For example, a supervisory commitee does not need to have an implementation which CHECKS for office terms of exacatly 1, 2 or 3 years.
+
+We can skip much of the logic a real cu would need and put in what we need to prove our point.
+
+A Simple Credit Union:
+
+
+SEE:
+three types of federal credit union charters—single common bond (occupational and associational), multiple common bond (more than one group each having a common bond of occupation or association), and community.
+https://www.ncua.gov/Legal/GuidesEtc/GuidesManuals/supcomm.pdf
+http://www.ecfr.gov/cgi-bin/text-idx?SID=cee72d460451fe95071d9121833e689d&mc=true&node=pt12.7.701&rgn=div5#ap12.7.701_139.b
+
+
+A) Governance
+	create By-Laws
+	create board of directors
+	create supervisory commitee    SKIP: 3 - 5 people for terms of 1 ,2 or 3 years. SEE section 2.02 etc.
+		commitee selects chairperson and a secretary
+
+
+
+A_1) Business Plan
+	
+	Mission statement
+
+
+	Dazza may want to look at theese-
+
+	Document to file:
+	Federal Credit Union Investigation Report, NCUA 4001;
+
+	•  Organization Certificate, NCUA 4008;
+
+	•  Report of Official and Agreement To Serve, NCUA 4012;
+
+	•  Application and Agreements for Insurance of Accounts, NCUA 9500; and
+
+        •  Certification of Resolutions, NCUA 9501.
+
+
+A_2) Subscribers part 3
+
+	
+
+        •  The name of the proposed federal credit union;
+
+        •  The location of the proposed federal credit union and the territory in which it will operate;
+
+        •  The names and addresses of the subscribers to the certificate and the number of shares subscribed by each;
+
+        •  The initial par value of the shares;
+
+        •  The detailed proposed field of membership; and
+
+
+B) Users
+        create a new user {in the system}
+        create enable a service for the user:
+
+		certification of electronic signatures
+
+		SKIP: CryptoStore {store digital content for the user}
+		SKIP: Savings Account
+
+
+        suspend a service
+
+C) Services
+
+	Certification services such as certification of electronic signatures
+
+	SKIP: CryptoStore:  store digital stuff {e.g. users crypto keys} for user
+
+
+
+
+
+
+
+
+
+
+
+Some stuff pulled from the gov spec's
+
+More details from  
+http://www.ecfr.gov/cgi-bin/text-idx?SID=cee72d460451fe95071d9121833e689d&mc=true&node=pt12.7.701&rgn=div5#ap12.7.701_139.b
+just to show some of what is involved-
+
+
+Re: Business Plan
+
+
+	•  Mission statement;
+
+•  Analysis of market conditions, including if applicable, geographic, demographic, employment, income, housing, and other economic data;
+
+•  Evidence of member support;
+
+•  Goals for shares, loans, and for number of members;
+
+•  Financial services needed/desired;
+
+•  Financial services to be provided to members of all segments within the field of membership;
+
+•  How/when services are to be implemented;
+
+•  Organizational/management plan addressing qualification and planned training of officials/employees;
+
+•  Continuity plan for directors, committee members and management staff;
+
+	•  Operating facilities, to include office space/equipment and supplies, safeguarding of assets, insurance coverage, etc.;
+
+	•  Type of record keeping and data processing system;
+
+	•  Detailed semiannual pro forma financial statements (balance sheet, income and expense projections) for 1st and 2nd year, including assumptions—e.g., loan and dividend rates;
+
+	•  Plans for operating independently;
+
+	•  Written policies (shares, lending, investments, funds management, capital accumulation, dividends, collections, etc.);
+
+	•  Source of funds to pay expenses during initial months of operation, including any subsidies, assistance, etc., and terms or conditions of such resources; and
+
+	•  Evidence of sponsor commitment (or other source of support) if subsidies are critical to success of the federal credit union. Evidence may be in the form of letters, contracts, financial statements from the sponsor, and any other such document on which the proposed federal credit union can substantiate its projections.
+
+
+General:
+	V.B—Charter Application Documentation
+V.B.1—General
+
+As discussed previously in this Chapter, the organizer of a federal credit union charter must, at a minimum, provide evidence that:
+
+•  The group(s) possess an appropriate common bond or the geographical area to be served is a well-defined local community, neighborhood, or rural district;
+
+•  The subscribers, prospective officials, and employees are of good character and fitness; and
+
+•  The establishment of the credit union is economically advisable.
+
+As part of the application process, the organizer must submit the following forms, which are available in appendix 4 of this Manual:
+
+•  Federal Credit Union Investigation Report, NCUA 4001;
+
+•  Organization Certificate, NCUA 4008;
+
+•  Report of Official and Agreement To Serve, NCUA 4012;
+
+•  Application and Agreements for Insurance of A		
+ccounts, NCUA 9500; and
+
+	•  Certification of Resolutions, NCUA 9501.
+
+
+
+
+
+
+
