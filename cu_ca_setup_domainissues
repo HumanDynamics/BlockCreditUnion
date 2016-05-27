@@ -1,0 +1,34 @@
+Using LetsEncrypt CA server "certbot" requires a domain name to bind certificates.
+
+I put in www.media.mit.edu...(knowing it would fail) just to get to the next step in software configuration.
+
+Here is the output-
+
+Failed authorization procedure. www.media.mit.edu (tls-sni-01): urn:acme:error:unauthorized :: The client lacks sufficient authorization :: Incorrect validation certificate for TLS-SNI-01 challenge. Requested cd17e05b919387e7acc40396a9887d64.c8fb2bd6257bb71eba1ff052ab0816fe.acme.invalid from 18.85.28.11:443. Received certificate containing '*.media.mit.edu'
+
+IMPORTANT NOTES:
+ - If you lose your account credentials, you can recover through
+   e-mails sent to brenden@media.mit.edu.
+ - The following errors were reported by the server:
+
+   Domain: www.media.mit.edu
+   Type:   unauthorized
+   Detail: Incorrect validation certificate for TLS-SNI-01 challenge.
+   Requested cd17e05b919387e7acc40396a9887d64.c8fb2bd6257bb71eba1ff052
+   ab0816fe.acme.invalid from 18.85.28.11:443. Received certificate
+   containing '*.media.mit.edu'
+
+   To fix these errors, please make sure that your domain name was
+   entered correctly and the DNS A record(s) for that domain
+   contain(s) the right IP address.
+ - Your account credentials have been saved in your Certbot
+   configuration directory at /etc/letsencrypt. You should make a
+   secure backup of this folder now. This configuration directory will
+   also contain certificates and private keys obtained by Certbot so
+   making regular backups of this folder is ideal.
+
+
+So we need 
+1) a domain name and 
+2) DNS A record(s) for that domain contain(s) 
+3) the right IP address
