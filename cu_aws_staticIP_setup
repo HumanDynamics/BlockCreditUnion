@@ -1,0 +1,198 @@
+
+# go to aws and set up an account.
+
+# NOTE aws has two root dashboads EC2 AND VPC. 
+# all EC2 Instance aka servers get launched into a default
+# vpc VIRUTAL PRIVAE CLOUD.
+# so you you dont have to go to the vpc dashboard
+# but if you did or needed to find it it is a seaperate
+# root dashoard: under the main root page for aws you should see
+# AWS Services- under the section COMPUTE is EC2 click on that will 
+# bring you to the EC2 dashboard
+# UNDER AWS Services- under the section NETWORKING is VPC click on that will 
+# bring you to the VPC dashboard
+
+
+# SECURITY GROUP SETUP
+# you need to configure a security group 
+# a security group is really a set of "fire wall" rules that control what goes in and out of a 
+# machine. What you doe is configure the security group then latter BIND that to you EC2 instance.
+# for a web server and cert server you are going to need 3 inbound rules
+# http, https ssl
+# under E2C Dashboadr find Network and Security then click on "Security Groups" 
+# CLICK ON CREATE SECURITY GROUP
+# name the securty group something like WebServer
+# give it a description like allow in http, https, ssh 
+# SELECT THE VPC (use the default vpc or the one you created- see above)
+# under INBOUND TAB 
+# CLICK ADD RULE
+# UNDER TYPE SELECT CUSTOM TCP RULE PULL DOWN THEN SELCT : SSH 
+# UNDER SOURCE SELECT CUSTOM (IP) {you can leave this 0.0.0.0 or change it to a spcific IP}
+# In production you might want to limit ssh to a specific ip
+# CLICK CREATE TO CREATE THE RULE
+# REPEATE FOR ADDING RULES FOR HTTP port 80 AND HTTPS port 443
+
+
+# LAUNCH AN EC2 INSTANCE
+# CLICK the button LAUNCH INSTANCE
+# PICK UBUNTU Server 14.04 LTS 
+# CLICK SELECT
+# PICK YOU INSTANCE TYPE t2micro is fine
+# on the bottom right DO NOT click the button "Review and Launch" BUT INSTEAD 
+# CLICK CONFIGURE INSTANCE DETAILS
+# You should be on a page called Configure Instance Details
+# UNDER NETWORK you should see vpc- xxxxxx (default) in a drop down menu 
+# If you are using the default vpc then select it. if you created your own new vpc select that
+# BASICALLY YOU ARE PICKING WHICH NETWORK virtual private cloud you are launching the instance
+# into. The default should be auto selected so just use it.
+# DO NOT click REVIEW AND LAUNCH but instead (on the lower right click to the next thing to 
+# configure CLICK Next: Add Storage)
+# YOU CAN SKIP THIS PAGE SO AT THE BOTTOM RIGHT 
+# DO NOT click REVIEW AND LAUNCH but on the lower right instead CLICK:
+# NEXT: TAG INSTANCE
+# give the intance a key "name" such as (xxx) WebServer and a value: "Development Machine"
+# CLICK CREATE TAG
+# DO NOT click REVIEW AND LAUNCH but on the lower right instead CLICK:
+# NEXT: CONFIGURE SECURITY GROUP
+# THIS IS WHERE YOU BIND THE SECURITY GROUP (aka firewall rules) to your instance.
+# SINCE WE ALREADY CREATED A SECURITY GROUP ABOVE- 
+# UNDER Assign a securty group- CKICK THE RADIO BUTTON "Select an existing securty group"
+# SELECT THE SECURUTY GROUP YOU CREATED ABOVE "(xxx) WebServer"
+# NOW THE MOMENT OF TRUTH:
+# in the lowwer right NOW:
+# CLICK: Review and Launch
+# in the lowwer right NOW:
+# CLICK: Launch
+
+# select your key pair
+# you keypair is a file used insead of usernames and passwords
+# if you made one before select it 
+# if you havent Create a new one and put it in ~/.ssh 
+# chmod the .ssh dir to chmod 700 to secure it.
+# SELECT YOU KEYPAIR
+# CLICK Launch Instances
+# You did it !!! 
+# CLICK view Instances to see it run
+
+# VERIFY THE SECURITY GROUP
+# CLICK the EC2 instance 
+# CLICK the Description TAB and look on the right for Security Groups
+# the Security Group shoud be (xxx) WebServer that you created. 
+
+
+
+# IP (Elastic IP a.k.a STATIC IP) SETUP
+# What we want to do here is create an IP adress that persits a.k.a. like a static IP
+# addresss the lives even after you terinate an EC2 instance. You need this if you are
+# binding to an IP Adress which has a registerd domain name. You would create the 
+# Elastic IP here and give the public IP ADDRESS to the person who registered the 
+# domain name so they can point the root DNS servers to this public IP Address.
+# go to your EC2 Dashboard
+# under Network & Security find Elastic IP's
+# (if you dont have any free elastic ip set up then create one or two by button ALLOCAT NEW ADDRESS)
+# (the Elastic IP addres on left IS your public ip address) {all of this may have been done for you}
+# (latter you are going to bind this ip public ipaddress to a vpc VIRTUAL PRIVATE CLOUD)
+
+*****************************************************************************************
+# NETWORK INTERFACE SETUP  This can be skiped as you can bind and ELASTIC IP ADDRESS DIRECTLY 
+# TO AN EC2 INSTANCE BELOW. (I leave it here because it can be usefull)
+# WHAT WE ARE DOING HERE IS CREATING A NETWORK INTERFACE AND BINDING THE ELASTIC IP TO IT
+# DO NOT MISS THIS STEP
+# go to your EC2 Dashboard
+# under Network & Security find Network Interfaces
+# CLICK: Create Network Interface
+# Description Name it (xxx) WebServer Staic IP
+# pick a sub net
+# DO NOT MISS THIS NEXT STEP
+# DO NOT MISS THIS NEXT STEP
+# DO NOT MISS THIS NEXT STEP
+# DO NOT MISS THIS NEXT STEP
+# DO NOT MISS THIS NEXT STEP
+# In the Security Groups selection pull down
+# CLICK the Security Group you created (xxx) WebServer- allow htp https ssh
+# CLICK Yes, Create
+# After you create it mouse over the Name filed and pencile will appear in which you can name it
+# NAME IT WebServer Staic IP
+##### YOU CAN NOW GO TO ACTIONS
+# In Network interfaces- find the button at the top called ACTIONS
+# CLICK: ACTIONS
+# A menu appears
+# SELECT ASSOCIATE ADDRESS
+# THIS IS WHERE WE BIND THE ELASTIC IP ADDRESS (WE CREATED ABOVE) TO THE NETWOK CARD WHICH IS 
+# ALREADY BOUND TO THE RUNNING EC2 INSTANCE
+# CHECK THE BOX:  ALLOW Reassociateion 
+From the pulldown select Associate Address
+# CLICK THE BUTTON: ASSOCIATE ADDRESS
+**********************************************************************************************
+
+# EC2 INSTANCE BINDING TO ELASTIC IP ADDRESS
+# WHAT WE ARE DOING HERE IS BINDING THE ELASTIC IP ADDRESS WE CREATED TO 
+# THE ALREADY RUNNING EC2 INSTANCE
+# DO NOT MISS THIS NEXT STEP
+# DO NOT MISS THIS NEXT STEP
+# DO NOT MISS THIS NEXT STEP
+# DO NOT MISS THIS NEXT STEP
+# DO NOT MISS THIS NEXT STEP
+# go to your EC2 Dashboard
+# UNDER NETWORK & SECURITY 
+# CLICK ELASTIC IPs (as you did before)
+# CLICK TO SELECT THE FREE Elastic IP address with the public IP ADDRESS THAT YOU WANT
+# (THIS SHOULD BE WHAT YOU GAVE THE PERSON WHO REGISTERED THE DOMAN NAME)
+# SELECT THE BUTTON AT THE TOP CALLED ACTIONS 
+# CLICK ASSOCIATE ADDRESS
+# THIS IS WHERE YOU BIND THE ELASTIC IP ADDRESS TO THE RUNNING EC2 INSTANCE
+# THIS IS WHERE YOU BIND THE ELASTIC IP ADDRESS TO THE RUNNING EC2 INSTANCE
+# THIS IS WHERE YOU BIND THE ELASTIC IP ADDRESS TO THE RUNNING EC2 INSTANCE
+# THIS IS WHERE YOU BIND THE ELASTIC IP ADDRESS TO THE RUNNING EC2 INSTANCE
+# THIS IS WHERE YOU BIND THE ELASTIC IP ADDRESS TO THE RUNNING EC2 INSTANCE
+# THIS IS WHERE YOU BIND THE ELASTIC IP ADDRESS TO THE RUNNING EC2 INSTANCE
+# THIS IS WHERE YOU BIND THE ELASTIC IP ADDRESS TO THE RUNNING EC2 INSTANCE
+# THIS IS WHERE YOU BIND THE ELASTIC IP ADDRESS TO THE RUNNING EC2 INSTANCE
+# OK NOW THAT WE ARE CLEAR ON WHAT WE ARE DOING 
+# In the popup box You can select either already an alredy running by EC2 Instance OR
+# A NETWORK INTERFACE (if you did that above) Select the network Interface you named
+# (xxx) WebServer StaticIP 
+# OR  
+# IF YOU WANT TO ASSOCIATE THE ADDRESS BY EC2 INSTANCE GO BACK TO EC2 DASHBOARD 
+# AND GET THE INSTANCE ID and select it here.
+# NOW UNDER PRIVATE IP ADDRESS CLICK REASOCIATION (NEW INSTANCE SO IT SHOULD NOT MATTER)
+# NOW CLICK Associate to bind the Elastic IP Address to the running EC2 Instance
+
+# Pat your self on the back- You have given the EC2 INSTANCE A PUBLIC IP ADDRESS
+************************************
+
+
+
+# VERIFY THE PUBLIC IP ADDRESS
+# CLICK the Description TAB and look on the right for Elastic IP
+# if that has a dash  and No IP address you missed a step and the
+# server was assigned a random public ip address  
+# YOU CAN CORRECT THIS BY GOING TO THE EC2 DASHBOARD
+# UNDER NETWORK & SECURITY
+# CLICK Network Interfaces
+# FIND THE INTERFACE ASSOCIATED WITH (xxx) WebServer
+# Click the radio button to select it.
+# AT THE TOP OF THE NEWTWORK INTERFACE PAGE IS A BUTTON CALLED ACTIONS
+# CLICK ACTIONS
+# on the menu select DISASSOCIATE ADDRESS
+# CLICK Yes, Disassociate 
+
+# Test from a webrowser
+# Go to a webserver an type in the ELASTIC IP ADDRESS
+# Since you dont have a web server you cant connect 
+
+# YOU CAN TEST IF THE PORTS ARE ACCESSABLE 
+nmap -p 22  foo.com
+nmap -p 80  foo.com
+nmap -p 443 foo.com
+
+# if you can also test by ip-
+nmap -p 22  52.204.104.16
+#port 22 is ssh which should be oppen
+# since you have not set up a webserver yet port 80 may report closed.
+
+# NEXT LOG INTO THE MACHINE's CLI Command Line Interface
+# And we are going to install a web server!
+
+
+

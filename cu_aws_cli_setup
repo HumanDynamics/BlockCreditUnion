@@ -1,0 +1,46 @@
+#AWS COMMAND LINE INSTALLATION
+
+#see http://docs.aws.amazon.com/cli/latest/userguide/installing.html#install-pip
+
+sudo pip install awscli --ignore-installed six
+sudo apt-get install curl
+
+curl -O https://bootstrap.pypa.io/get-pip.py
+sudo python get-pip.py
+sudo pip install awscli
+sudo pip install --upgrade awscli
+
+
+
+#Configure
+http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html
+
+
+#make aws dir in home 
+#mkdir ~/.aws
+
+
+
+aws configure
+
+#enter in credentials
+
+#This will show running intances from command  line
+
+aws ec2 describe-instances --output table --region us-east-1
+
+# NOW YOU READY TO LOGIN 
+
+#if you ELASTIC (PUBLIC IP) was 52.204.104.16
+# Then
+
+
+ssh -i ~/.ssh/MyFirstKeyPair.pem ubuntu@52.204.104.16
+
+
+# THE FOLLOW WILL COME UP... JUST HIT YES AS IT IS YOUR FIRST TIME LOGGING INTO
+# THE MACHINE
+# The authenticity of host '52.204.104.16 (52.204.104.16)' can't be established.
+# ECDSA key fingerprint is ec:75:15:92:9e:10:47:ce:ea:81:5a:9a:47:79:12:b9.
+# Are you sure you want to continue connecting (yes/no)? yes
+

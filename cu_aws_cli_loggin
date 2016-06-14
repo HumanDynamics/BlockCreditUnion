@@ -1,0 +1,20 @@
+
+
+# NOW YOU READY TO LOGIN 
+
+#if you ELASTIC (PUBLIC IP) was 52.204.104.16
+# Then
+
+
+ssh -i ~/.ssh/MyFirstKeyPair.pem ubuntu@52.204.104.16
+
+
+# THE FOLLOW WILL COME UP... JUST HIT YES AS IT IS YOUR FIRST TIME LOGGING INTO
+# THE MACHINE
+# The authenticity of host '52.204.104.16 (52.204.104.16)' can't be established.
+# ECDSA key fingerprint is ec:75:15:92:9e:10:47:ce:ea:81:5a:9a:47:79:12:b9.
+# Are you sure you want to continue connecting (yes/no)? yes
+
+
+
+

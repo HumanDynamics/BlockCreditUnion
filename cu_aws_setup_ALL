@@ -1,0 +1,435 @@
+  GNU nano 2.2.6                   File: cu_aws_setup_ALL                                             
+
+
+This file cu_aws_setup_ALL contains the cancatenated contents of the following 
+6 seaperate files:
+
+cu_aws_staticIP_setup {This shows how to set up with Elastic "Static" IP addresses 
+                        AND how to bind and launch instances which use a staic ip address.
+                        This is necessary if you what to have a webserver use a staic IP     
+                        to a reagistered domain name.
+
+                        The IP address will persist and  can be reused by a new aws instances}
+
+cu_aws_cli_setup  {asw setting up the command line interface}
+cu_aws_cli_loggin {logging into your new intaance}
+cu_aws_iam_setup  {set up aws iam security}
+cu_aws_configure_appache {how to install appache web server}
+cu_aws_configure_certbot {how to install and configure Let Encrypt cert 
+                                server that validates your webserver can serve 
+                                content from the specified domain name}
+
+
+
+############################################################################################
+cu_aws_staticIP_setup:{This shows how to set up with Elastic "Static" IP addresses
+                        AND how to bind and launch instances which use a staic ip address.
+                        This is necessary if you what to have a webserver use a staic IP
+                        to a reagistered domain name.
+
+                        The IP address will persist and  can be reused by a new aws instances}
+
+
+
+# go to aws and set up an account.
+
+# NOTE aws has two root dashboads EC2 AND VPC. 
+# all EC2 Instance aka servers get launched into a default
+# vpc VIRUTAL PRIVAE CLOUD.
+# so you you dont have to go to the vpc dashboard
+# but if you did or needed to find it it is a seaperate
+# root dashoard: under the main root page for aws you should see
+# AWS Services- under the section COMPUTE is EC2 click on that will 
+# bring you to the EC2 dashboard
+# UNDER AWS Services- under the section NETWORKING is VPC click on that will 
+# bring you to the VPC dashboard
+
+
+# SECURITY GROUP SETUP
+# you need to configure a security group 
+# a security group is really a set of "fire wall" rules that control what goes in and out of a 
+# machine. What you doe is configure the security group then latter BIND that to you EC2 instance.
+# for a web server and cert server you are going to need 3 inbound rules
+# http, https ssl
+# under E2C Dashboadr find Network and Security then click on "Security Groups" 
+# CLICK ON CREATE SECURITY GROUP
+# name the securty group something like WebServer
+# give it a description like allow in http, https, ssh 
+# SELECT THE VPC (use the default vpc or the one you created- see above)
+# under INBOUND TAB 
+# CLICK ADD RULE
+# UNDER TYPE SELECT CUSTOM TCP RULE PULL DOWN THEN SELCT : SSH 
+# UNDER SOURCE SELECT CUSTOM (IP) {you can leave this 0.0.0.0 or change it to a spcific IP}
+# In production you might want to limit ssh to a specific ip
+# CLICK CREATE TO CREATE THE RULE
+# REPEATE FOR ADDING RULES FOR HTTP port 80 AND HTTPS port 443
+
+
+# LAUNCH AN EC2 INSTANCE
+# CLICK the button LAUNCH INSTANCE
+# PICK UBUNTU Server 14.04 LTS 
+# CLICK SELECT
+# PICK YOU INSTANCE TYPE t2micro is fine
+# on the bottom right DO NOT click the button "Review and Launch" BUT INSTEAD 
+# CLICK CONFIGURE INSTANCE DETAILS
+# You should be on a page called Configure Instance Details
+# UNDER NETWORK you should see vpc- xxxxxx (default) in a drop down menu 
+# If you are using the default vpc then select it. if you created your own new vpc select that
+# BASICALLY YOU ARE PICKING WHICH NETWORK virtual private cloud you are launching the instance
+# into. The default should be auto selected so just use it.
+# DO NOT click REVIEW AND LAUNCH but instead (on the lower right click to the next thing to 
+# configure CLICK Next: Add Storage)
+# YOU CAN SKIP THIS PAGE SO AT THE BOTTOM RIGHT 
+# DO NOT click REVIEW AND LAUNCH but on the lower right instead CLICK:
+# NEXT: TAG INSTANCE
+# give the intance a key "name" such as (xxx) WebServer and a value: "Development Machine"
+# CLICK CREATE TAG
+# DO NOT click REVIEW AND LAUNCH but on the lower right instead CLICK:
+# NEXT: CONFIGURE SECURITY GROUP
+# THIS IS WHERE YOU BIND THE SECURITY GROUP (aka firewall rules) to your instance.
+# SINCE WE ALREADY CREATED A SECURITY GROUP ABOVE- 
+# UNDER Assign a securty group- CKICK THE RADIO BUTTON "Select an existing securty group"
+# SELECT THE SECURUTY GROUP YOU CREATED ABOVE "(xxx) WebServer"
+# NOW THE MOMENT OF TRUTH:
+# in the lowwer right NOW:
+# CLICK: Review and Launch
+# in the lowwer right NOW:
+# CLICK: Launch
+
+# select your key pair
+# you keypair is a file used insead of usernames and passwords
+# if you made one before select it 
+# if you havent Create a new one and put it in ~/.ssh 
+# chmod the .ssh dir to chmod 700 to secure it.
+# SELECT YOU KEYPAIR
+# CLICK Launch Instances
+# You did it !!! 
+# CLICK view Instances to see it run
+
+# VERIFY THE SECURITY GROUP
+# CLICK the EC2 instance 
+# CLICK the Description TAB and look on the right for Security Groups
+# the Security Group shoud be (xxx) WebServer that you created. 
+
+
+
+# IP (Elastic IP a.k.a STATIC IP) SETUP
+# What we want to do here is create an IP adress that persits a.k.a. like a static IP
+# addresss the lives even after you terinate an EC2 instance. You need this if you are
+# binding to an IP Adress which has a registerd domain name. You would create the 
+# Elastic IP here and give the public IP ADDRESS to the person who registered the 
+# domain name so they can point the root DNS servers to this public IP Address.
+# go to your EC2 Dashboard
+# under Network & Security find Elastic IP's
+# (if you dont have any free elastic ip set up then create one or two by button ALLOCAT NEW ADDRESS)
+# (the Elastic IP addres on left IS your public ip address) {all of this may have been done for you}
+# (latter you are going to bind this ip public ipaddress to a vpc VIRTUAL PRIVATE CLOUD)
+
+*****************************************************************************************
+# NETWORK INTERFACE SETUP  This can be skiped as you can bind and ELASTIC IP ADDRESS DIRECTLY 
+# TO AN EC2 INSTANCE BELOW. (I leave it here because it can be usefull)
+# WHAT WE ARE DOING HERE IS CREATING A NETWORK INTERFACE AND BINDING THE ELASTIC IP TO IT
+# DO NOT MISS THIS STEP
+# go to your EC2 Dashboard
+# under Network & Security find Network Interfaces
+# CLICK: Create Network Interface
+# Description Name it (xxx) WebServer Staic IP
+# pick a sub net
+# DO NOT MISS THIS NEXT STEP
+# DO NOT MISS THIS NEXT STEP
+# DO NOT MISS THIS NEXT STEP
+# DO NOT MISS THIS NEXT STEP
+# DO NOT MISS THIS NEXT STEP
+# In the Security Groups selection pull down
+# CLICK the Security Group you created (xxx) WebServer- allow htp https ssh
+# CLICK Yes, Create
+# After you create it mouse over the Name filed and pencile will appear in which you can name it
+# NAME IT WebServer Staic IP
+##### YOU CAN NOW GO TO ACTIONS
+# In Network interfaces- find the button at the top called ACTIONS
+# CLICK: ACTIONS
+# A menu appears
+# SELECT ASSOCIATE ADDRESS
+# THIS IS WHERE WE BIND THE ELASTIC IP ADDRESS (WE CREATED ABOVE) TO THE NETWOK CARD WHICH IS 
+# ALREADY BOUND TO THE RUNNING EC2 INSTANCE
+# CHECK THE BOX:  ALLOW Reassociateion 
+From the pulldown select Associate Address
+# CLICK THE BUTTON: ASSOCIATE ADDRESS
+**********************************************************************************************
+
+# EC2 INSTANCE BINDING TO ELASTIC IP ADDRESS
+# WHAT WE ARE DOING HERE IS BINDING THE ELASTIC IP ADDRESS WE CREATED TO 
+# THE ALREADY RUNNING EC2 INSTANCE
+# DO NOT MISS THIS NEXT STEP
+# DO NOT MISS THIS NEXT STEP
+# DO NOT MISS THIS NEXT STEP
+# DO NOT MISS THIS NEXT STEP
+# DO NOT MISS THIS NEXT STEP
+# go to your EC2 Dashboard
+# UNDER NETWORK & SECURITY 
+# CLICK ELASTIC IPs (as you did before)
+# CLICK TO SELECT THE FREE Elastic IP address with the public IP ADDRESS THAT YOU WANT
+# (THIS SHOULD BE WHAT YOU GAVE THE PERSON WHO REGISTERED THE DOMAN NAME)
+# SELECT THE BUTTON AT THE TOP CALLED ACTIONS 
+# CLICK ASSOCIATE ADDRESS
+# THIS IS WHERE YOU BIND THE ELASTIC IP ADDRESS TO THE RUNNING EC2 INSTANCE
+# THIS IS WHERE YOU BIND THE ELASTIC IP ADDRESS TO THE RUNNING EC2 INSTANCE
+# THIS IS WHERE YOU BIND THE ELASTIC IP ADDRESS TO THE RUNNING EC2 INSTANCE
+# THIS IS WHERE YOU BIND THE ELASTIC IP ADDRESS TO THE RUNNING EC2 INSTANCE
+# THIS IS WHERE YOU BIND THE ELASTIC IP ADDRESS TO THE RUNNING EC2 INSTANCE
+# THIS IS WHERE YOU BIND THE ELASTIC IP ADDRESS TO THE RUNNING EC2 INSTANCE
+# THIS IS WHERE YOU BIND THE ELASTIC IP ADDRESS TO THE RUNNING EC2 INSTANCE
+# THIS IS WHERE YOU BIND THE ELASTIC IP ADDRESS TO THE RUNNING EC2 INSTANCE
+# OK NOW THAT WE ARE CLEAR ON WHAT WE ARE DOING 
+# In the popup box You can select either already an alredy running by EC2 Instance OR
+# A NETWORK INTERFACE (if you did that above) Select the network Interface you named
+# (xxx) WebServer StaticIP 
+# OR  
+# IF YOU WANT TO ASSOCIATE THE ADDRESS BY EC2 INSTANCE GO BACK TO EC2 DASHBOARD 
+# AND GET THE INSTANCE ID and select it here.
+# NOW UNDER PRIVATE IP ADDRESS CLICK REASOCIATION (NEW INSTANCE SO IT SHOULD NOT MATTER)
+# NOW CLICK Associate to bind the Elastic IP Address to the running EC2 Instance
+
+# Pat your self on the back- You have given the EC2 INSTANCE A PUBLIC IP ADDRESS
+************************************
+
+
+
+# VERIFY THE PUBLIC IP ADDRESS
+# CLICK the Description TAB and look on the right for Elastic IP
+# if that has a dash  and No IP address you missed a step and the
+# server was assigned a random public ip address  
+# YOU CAN CORRECT THIS BY GOING TO THE EC2 DASHBOARD
+# UNDER NETWORK & SECURITY
+# CLICK Network Interfaces
+# FIND THE INTERFACE ASSOCIATED WITH (xxx) WebServer
+# Click the radio button to select it.
+# AT THE TOP OF THE NEWTWORK INTERFACE PAGE IS A BUTTON CALLED ACTIONS
+# CLICK ACTIONS
+# on the menu select DISASSOCIATE ADDRESS
+# CLICK Yes, Disassociate 
+
+# Test from a webrowser
+# Go to a webserver an type in the ELASTIC IP ADDRESS
+# Since you dont have a web server you cant connect 
+
+# YOU CAN TEST IF THE PORTS ARE ACCESSABLE 
+nmap -p 22  foo.com
+nmap -p 80  foo.com
+nmap -p 443 foo.com
+
+# if you can also test by ip-
+nmap -p 22  52.204.104.16
+#port 22 is ssh which should be oppen
+# since you have not set up a webserver yet port 80 may report closed.
+
+# NEXT LOG INTO THE MACHINE's CLI Command Line Interface
+# And we are going to install a web server!
+
+
+############################################################################################
+cu_aws_cli_setup  {asw setting up the command line interface}
+
+
+
+#AWS COMMAND LINE INSTALLATION
+
+#see http://docs.aws.amazon.com/cli/latest/userguide/installing.html#install-pip
+
+sudo pip install awscli --ignore-installed six
+sudo apt-get install curl
+
+curl -O https://bootstrap.pypa.io/get-pip.py
+sudo python get-pip.py
+sudo pip install awscli
+sudo pip install --upgrade awscli
+
+
+
+#Configure
+http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html
+
+
+#make aws dir in home 
+#mkdir ~/.aws
+
+
+
+aws configure
+
+#enter in credentials
+
+#This will show running intances from command  line
+
+aws ec2 describe-instances --output table --region us-east-1
+
+# NOW YOU READY TO LOGIN 
+
+#if you ELASTIC (PUBLIC IP) was 52.204.104.16
+# Then
+
+
+ssh -i ~/.ssh/MyFirstKeyPair.pem ubuntu@52.204.104.16
+
+
+# THE FOLLOW WILL COME UP... JUST HIT YES AS IT IS YOUR FIRST TIME LOGGING INTO
+# THE MACHINE
+# The authenticity of host '52.204.104.16 (52.204.104.16)' can't be established.
+# ECDSA key fingerprint is ec:75:15:92:9e:10:47:ce:ea:81:5a:9a:47:79:12:b9.
+# Are you sure you want to continue connecting (yes/no)? yes
+
+
+
+############################################################################################
+cu_aws_cli_loggin {logging into your new intaance}
+
+
+# NOW YOU READY TO LOGIN 
+
+#if you ELASTIC (PUBLIC IP) was 52.204.104.16
+# Then
+
+
+ssh -i ~/.ssh/MyFirstKeyPair.pem ubuntu@52.204.104.16
+
+
+# THE FOLLOW WILL COME UP... JUST HIT YES AS IT IS YOUR FIRST TIME LOGGING INTO
+# THE MACHINE
+# The authenticity of host '52.204.104.16 (52.204.104.16)' can't be established.
+# ECDSA key fingerprint is ec:75:15:92:9e:10:47:ce:ea:81:5a:9a:47:79:12:b9.
+# Are you sure you want to continue connecting (yes/no)? yes
+
+
+############################################################################################
+cu_aws_iam_setup  {set up aws iam security}
+
+https://aws.amazon.com/getting-started/tutorials/backup-to-s3-cli/
+
+
+############################################################################################
+cu_aws_configure_appache {how to install appache web server}
+
+
+
+
+# NOW YOU READY TO LOGIN
+
+#if you ELASTIC (PUBLIC IP) was 52.204.104.16
+# Then
+
+
+ssh -i ~/.ssh/MyFirstKeyPair.pem ubuntu@52.204.104.16
+
+
+# THE FOLLOW WILL COME UP... JUST HIT YES AS IT IS YOUR FIRST TIME LOGGING INTO
+# THE MACHINE
+# The authenticity of host '52.204.104.16 (52.204.104.16)' can't be established.
+# ECDSA key fingerprint is ec:75:15:92:9e:10:47:ce:ea:81:5a:9a:47:79:12:b9.
+# Are you sure you want to continue connecting (yes/no)? yes
+
+
+
+
+### install appache2 {keep the default www.index.html page}
+# SKIP THE INSTRUCTIONS FOR changing the default web page
+# follow these instructions for installin appache2 
+
+
+#  https://www.dokuwiki.org/install:ubuntu
+
+sudo apt-get update
+#sudo apt-get upgrade
+sudo apt-get install apache2 libapache2-mod-php5
+sudo a2enmod rewrite
+
+sudo wget http://download.dokuwiki.org/src/dokuwiki/dokuwiki-stable.tgz
+sudo tar xvf dokuwiki-stable.tgz
+sudo mv dokuwiki-*/ dokuwiki
+sudo mkdir -p  /var/www/dokuwiki
+sudo chown -R www-data:www-data /var/www/dokuwiki
+#sudo nano /etc/apache2/sites-enabled/000*.conf <<<--- SKIP THIS
+
+
+sudo nano /etc/apache2/apache2.conf
+
+#    For directory /var/www/ replace
+#    AllowOverride None
+#    with
+#    AllowOverride All
+
+#sudo rm /var/www/dokuwiki/install.php  <<<---SKIP
+# sudo apt-get install postfix << SKIP
+
+sudo service apache2 restart
+
+#TEST
+http://www.blockchainprojects.info
+
+
+
+############################################################################################
+cu_aws_configure_certbot {how to install and configure Let Encrypt cert
+                                server that validates your webserver can serve
+                                content from the specified domain name}
+
+# NOW YOU READY TO LOGIN 
+#if you ELASTIC (PUBLIC IP) was 52.204.104.16
+# Then loggin via
+
+ssh -i ~/.ssh/MyFirstKeyPair.pem ubuntu@52.204.104.16
+
+
+
+
+#see 
+# https://letsencrypt.org/getting-started/
+# https://certbot.eff.org/
+# https://certbot.eff.org/docs/using.html#
+
+
+#GET CERTBOT FROM HERE
+sudo wget https://dl.eff.org/certbot-auto
+sudo chmod a+x certbot-auto
+
+
+#INSTALL
+./certbot-auto
+
+# Choose Yes for the Question: You may specify name manually Would you like to continue?
+# put in you domain name, email when asked  and aggree.
+# Choose Secure HTTPS for access
+
+
+Test:  USING THE PUBLIC domainname OF YOUR WEBSERVER
+https://www.ssllabs.com/ssltest/analyze.html?d=www.blockchainprojects.info
+
+
+# GREAT !!!! You are now able to run a cert server against your domain !!!
+
+
+See automatic renewal:
+https://certbot.eff.org/#ubuntutrusty-apache
+
+
+
+IMPORTANT NOTES:
+ - Congratulations! Your certificate and chain have been saved at
+   /etc/letsencrypt/live/www.blockchainprojects.info/fullchain.pem.
+   Your cert will expire on 2016-09-11. To obtain a new or tweaked
+   version of this certificate in the future, simply run certbot-auto
+   again with the "certonly" option. To non-interactively renew *all*
+   of your certificates, run "certbot-auto renew"
+ - If you lose your account credentials, you can recover through
+   e-mails sent to brenden@media.mit.edu.
+ - Your account credentials have been saved in your Certbot
+   configuration directory at /etc/letsencrypt. You should make a
+   secure backup of this folder now. This configuration directory will
+   also contain certificates and private keys obtained by Certbot so
+   making regular backups of this folder is ideal.
+ - If you like Certbot, please consider supporting our work by:
+
+
+
+
+
+

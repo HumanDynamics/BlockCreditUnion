@@ -1,0 +1,59 @@
+
+
+# NOW YOU READY TO LOGIN
+
+#if you ELASTIC (PUBLIC IP) was 52.204.104.16
+# Then
+
+
+ssh -i ~/.ssh/MyFirstKeyPair.pem ubuntu@52.204.104.16
+
+
+# THE FOLLOW WILL COME UP... JUST HIT YES AS IT IS YOUR FIRST TIME LOGGING INTO
+# THE MACHINE
+# The authenticity of host '52.204.104.16 (52.204.104.16)' can't be established.
+# ECDSA key fingerprint is ec:75:15:92:9e:10:47:ce:ea:81:5a:9a:47:79:12:b9.
+# Are you sure you want to continue connecting (yes/no)? yes
+
+
+
+
+### install appache2 {keep the default www.index.html page}
+# SKIP THE INSTRUCTIONS FOR changing the default web page
+# follow these instructions for installin appache2 
+
+
+#  https://www.dokuwiki.org/install:ubuntu
+
+sudo apt-get update
+#sudo apt-get upgrade
+sudo apt-get install apache2 libapache2-mod-php5
+sudo a2enmod rewrite
+
+sudo wget http://download.dokuwiki.org/src/dokuwiki/dokuwiki-stable.tgz
+sudo tar xvf dokuwiki-stable.tgz
+sudo mv dokuwiki-*/ dokuwiki
+sudo mkdir -p  /var/www/dokuwiki
+sudo chown -R www-data:www-data /var/www/dokuwiki
+#sudo nano /etc/apache2/sites-enabled/000*.conf <<<--- SKIP THIS
+
+
+sudo nano /etc/apache2/apache2.conf
+
+#    For directory /var/www/ replace
+#    AllowOverride None
+#    with
+#    AllowOverride All
+
+#sudo rm /var/www/dokuwiki/install.php  <<<---SKIP
+# sudo apt-get install postfix << SKIP
+
+sudo service apache2 restart
+
+
+
+
+#TEST
+http://foo.com
+
+

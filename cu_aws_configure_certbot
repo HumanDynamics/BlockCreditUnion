@@ -1,0 +1,61 @@
+# NOW YOU READY TO LOGIN 
+#if you ELASTIC (PUBLIC IP) was 52.204.104.16
+# Then loggin via
+
+ssh -i ~/.ssh/MyFirstKeyPair.pem ubuntu@52.204.104.16
+
+
+
+
+#see 
+# https://letsencrypt.org/getting-started/
+# https://certbot.eff.org/
+# https://certbot.eff.org/docs/using.html#
+
+
+#GET CERTBOT FROM HERE
+sudo wget https://dl.eff.org/certbot-auto
+sudo chmod a+x certbot-auto
+
+
+#INSTALL
+./certbot-auto
+
+# Choose Yes for the Question: You may specify name manually Would you like to continue?
+# put in you domain name, email when asked  and aggree.
+# Choose Secure HTTPS for access
+
+
+Test:  USING THE PUBLIC domainname OF YOUR WEBSERVER
+https://www.ssllabs.com/ssltest/analyze.html?d=www.blockchainprojects.info
+
+
+# GREAT !!!! You are now able to run a cert server against your domain !!!
+
+
+See automatic renewal:
+https://certbot.eff.org/#ubuntutrusty-apache
+
+
+
+IMPORTANT NOTES:
+ - Congratulations! Your certificate and chain have been saved at
+   /etc/letsencrypt/live/www.blockchainprojects.info/fullchain.pem.
+   Your cert will expire on 2016-09-11. To obtain a new or tweaked
+   version of this certificate in the future, simply run certbot-auto
+   again with the "certonly" option. To non-interactively renew *all*
+   of your certificates, run "certbot-auto renew"
+ - If you lose your account credentials, you can recover through
+   e-mails sent to brenden@media.mit.edu.
+ - Your account credentials have been saved in your Certbot
+   configuration directory at /etc/letsencrypt. You should make a
+   secure backup of this folder now. This configuration directory will
+   also contain certificates and private keys obtained by Certbot so
+   making regular backups of this folder is ideal.
+ - If you like Certbot, please consider supporting our work by:
+
+
+
+
+
+
