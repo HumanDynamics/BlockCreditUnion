@@ -1,0 +1,22 @@
+
+
+##########################################################################
+# GENERAL MINT YOUR OWN COIN aka create a fixed number of Dollar Coins
+# SEE  cu_ethereum_setup_mint_your_own_DollarCoin
+##########################################################################
+
+To build your own currancy with a fixed number of coins you need to create a SmartContract for the wallet. This provides
+governance on those coins fixing their number permenatly. There are a number of steps to do this but the GENERALY if you follow
+the next tow lines you can create a "Dollar Coin" with a fixed number in circulation.  Of course you will have to change the names
+in the code to DollarCoin.
+
+https://blog.ethereum.org/2015/12/07/ethereum-in-practice-part-3-how-to-build-your-own-transparent-bank-on-the-blockchain/
+https://blog.ethereum.org/2015/12/03/how-to-build-your-own-cryptocurrency/  <<----- GENERALLY FOLLOW THIS
+
+
+This may also be helpfull
+http://chriseth.github.io/browser-solidity/#gist=21935dc37c5bfbe92e5a&version=soljson-latest.js <<----- another simple token example
+
+
+
+

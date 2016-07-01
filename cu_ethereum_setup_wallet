@@ -1,0 +1,290 @@
+
+##########################################################################
+# ETHEREUM WALLET- Theory and what you need to know before you start 
+# THE WALLET IS NOT CLEAR ABOUT HOW IT SETS UP WALETTS ETC
+# 
+#
+##########################################################################
+
+
+
+Generally you will install the ethereum wallet-
+
+Conceptuall the first time you run the wallet software is it asks for a password.....
+
+This password becomes the key to the DEFAULT ACCOUNT called MAIN ACCOUNT called Etherbase
+
+
+For this DEFAULT ACCOUNT YOU DO NOT HAVE TO SET UP A SIGNATURE (SINGLE OR MULTI SIG) "Contract" 
+BECAUSE IT HAS ALREDY BEEN DONE FOR YOU.
+
+YOU CAN immediatly add fake test ether to this MAIN ACCOUNT called Etherbase by coppying the address
+{copy address button} then 
+
+going to a faucet:
+
+https://zerogox.com/ethereum/wei_faucet
+
+waiting ten minutes. now you will have some ether in you account.... this is needed to create a smart contract.
+
+
+THE CONFUSION COMES WHEN YOU RUN THE ETHEREUM WALLET THE FIST TIME AND THE FIRST THING YOU DO IS CREATE A 
+
+NEW ACCOUNT.
+
+BASICALLY AN ETHEREUM WALLET SOFTWARE CAN HAVE SEVERAL ACCOUNTS (which manage wallet contracts) each with different addressses and passwords.
+
+I would see
+https://www.reddit.com/r/ethereum/comments/41wj26/ethereum_wallet_vs_account_whats_the_difference/
+
+
+which says-
+%%%%
+Accounts can be used as bare stores for ether, though they can also be used to do things other than just hold ether. When they are used to hold ether, Accounts can be thought of simply as private key/address pairs.
+
+The sole function of a Wallet is to manage ether, that is, receive, store and spend ether. Unlike Accounts, Wallets are controlled by code, which means that it is possible to customize their behavior. And, you won’t have to do any coding yourself; the Wallets come with a user interface that makes it easy to simply select the type of security/convenience enhancing customization you require.
+
+Wallets are controlled by code but ultimately that code also has a master, and that master is an Account with its password-protected private key. So Accounts serve two roles, as bare stores of ether in their own right, and as owners (or controllers) of feature-rich Wallets.
+
+Advantages of Wallets over Accounts:
+
+    Wallets can list incoming transactions; something Accounts cannot do.
+
+    Wallets can be setup as Multisig Wallets.
+
+    A Multisig Wallet can be structured such that it has a daily limit which you specify, and only if this daily limit is exceeded will multiple signatures be required.
+
+    Wallets can be setup as “Watch-Only” Wallets.
+
+Downside to Wallets over Accounts: Creating Accounts does not cost any gas; but creating Wallets does. In fact, Wallets incur a cost whenever you use them. You pay to create and use Wallets because they utilize the valuable computational and storage resources of the network.
+%%%%
+
+
+
+
+
+
+The confusion is-
+
+If you another account by Add Account....  YOU NEED THEN click the accunt and see the note section and THEN
+click the button:
+
+ ----->>>>>> create a wallet contract 
+
+This will bind single or multi sig contract to your wallet to ALLOW YOU TO ADD ETHER TO THE WALLET.
+
+You MUST DO THIS BEFORE YOU CAN ADD ETHER!!!!! The is already done for you in the 
+the DEFAULT ACCOUNT called MAIN ACCOUNT called Etherbase.
+
+But if you create your own account you must do this!!!
+
+The create a wallet contract creates a single or multi sig contract  which basically determines the default 
+governance for how funds can be withdrawn and added to you wallet aka if others need approval.
+
+
+
+I would also look at
+
+https://klmoney.wordpress.com/
+
+
+
+
+
+##########################################################################
+# DO NOT CLICK USE MAIN NETWORK OR TESTNET UNLESS YOU HAVE GOTTEN PEERS AND FULLY DOWNLOADED THE BLOCKCHAIN
+# see  https://klmoney.wordpress.com/
+##########################################################################
+
+
+
+##########################################################################
+# GENERAL THE WALLET INFO
+#
+##########################################################################
+
+Wallet info General
+https://klmoney.wordpress.com/getting-started/
+https://klmoney.wordpress.com/getting-started/
+https://klmoney.wordpress.com/getting-started/
+https://klmoney.wordpress.com/getting-started/
+https://klmoney.wordpress.com/getting-started/
+https://klmoney.wordpress.com/getting-started/
+https://klmoney.wordpress.com/getting-started/
+https://klmoney.wordpress.com/getting-started/
+https://klmoney.wordpress.com/getting-started/
+
+
+##########################################################################
+# INSTALLATION AND SETUP  THE WALLET
+#
+##########################################################################
+
+#################################
+## INSTALL AND RUN A TIME SERVER SO YOU CAN SYNC THE BLOCKS
+#################################
+sudo apt-get install ntp
+sudo nano /etc/ntp.conf
+sudo service ntp restart
+sudo ntpq -c lpeer
+sudo tail -f /var/log/syslog
+sudo ntpq -c lpeer
+
+Do make sure, if you are using a firewall, to open UDP 123
+https://www.youtube.com/watch?v=X_FcdPHH9vo
+
+
+#################################
+## INSTALL A WALLET
+#################################
+
+
+# Go to https://www.ethereum.org/
+# Find the button Download Etherium Wallet (for Linux) 
+# down load it and check sha256 checksum
+#unpack it into a directory such as ~/walletInstallDir/ethereum/wallets/
+
+
+#################################
+## LAUNCH WALLET SOFTWARE
+#################################
+
+# Now you need to set up the wallet by running-
+Open the etherium wallet
+~/walletInstallDir/ethereum/wallets/Ethereum-Wallet-linux64-0-7-6$ ./Ethereum-Wallet
+
+
+
+
+##########################################################################
+# DO NOT CLICK USE MAIN NETWORK OR TESTNET UNLESS YOU HAVE GOTTEN PEERS AND FULLY DOWNLOADED THE BLOCKCHAIN
+# see  https://klmoney.wordpress.com/
+##########################################################################
+
+
+##########################################################################
+# DO NOT CLICK USE MAIN NETWORK OR TESTNET UNLESS YOU HAVE GOTTEN PEERS AND FULLY DOWNLOADED THE BLOCKCHAIN
+# see  https://klmoney.wordpress.com/
+##########################################################################
+
+
+##########################################################################
+# DO NOT CLICK USE MAIN NETWORK OR TESTNET UNLESS YOU HAVE GOTTEN PEERS AND FULLY DOWNLOADED THE BLOCKCHAIN
+# see  https://klmoney.wordpress.com/
+##########################################################################
+
+##########################################################################
+# DO NOT CLICK USE MAIN NETWORK OR TESTNET UNLESS YOU HAVE GOTTEN PEERS AND FULLY DOWNLOADED THE BLOCKCHAIN
+# see  https://klmoney.wordpress.com/
+##########################################################################
+
+
+
+##########################################################################
+## CANT CONNECT TO PEERS PROBMEM
+#  see cu_ethereum_setup_networking
+##########################################################################
+
+##########################################################################
+## CANT CONNECT TO PEERS PROBMEM
+#  see cu_ethereum_setup_networking
+##########################################################################
+
+##########################################################################
+## CANT CONNECT TO PEERS PROBMEM
+#  see cu_ethereum_setup_networking
+##########################################################################
+
+##########################################################################
+## CANT CONNECT TO PEERS PROBMEM
+#  see cu_ethereum_setup_networking
+##########################################################################
+
+
+
+
+
+
+
+
+
+#################################
+## LAUNCH CREATE AN ACCOUNT IN A WALLET
+#################################
+
+# Now that you have the Wallet GUI running 
+# You need to create an Account 
+# You cant do anything untill you create a Wallet AND then an Account.
+# A Wallet can have many Accounts
+
+
+# Under the manin GUI Page-  
+# Under  AccountsOverview 
+
+# Find the button "Add Account" 
+# Click the button called Add Account
+# An accout is necessary to hold ether 
+# Name it something usefull like the name of user or what the account is for.
+
+
+#################################
+# CREATE AN "WALLET CONTRACT" AKA ACCOUNT CONTRACT IN A WALLET
+# Note this is confusing as the button says create a wallet contract but actually we are 
+# buinding this contract to the account you created in the wallet
+#################################
+ 
+# After the account is created double click on it
+#
+# In Order for this account to work you will need to create a wallet contract
+# After you double clicked on your wallet the first time.... in the Note Section
+# You should see a text hyper link called "Create a wallet Contract"
+# IT IS NECESARY FOR YOU TO CREATE A WALLLET "ACCOUNT"  CONTRACT ......
+# THIS DEFINES THE GOVERNANCE OF THE WALLET AKA HOW MANY PEOPLE MUST BE SIGNERS TO
+# APPROVE TRANSACTIONS.  For this wallet you can select "Single Owner Account"
+
+# Then hit the "Create Button"
+
+
+
+#################################
+# ADD ETHER TO THE ACCOUNT IN THE  WALLET
+#################################
+
+# You can now add ether to the accout you created in your wallet
+# Since you crated the wallet and account in a testnet you can get FREE ether by going to-
+# load up your wallet with free ether
+https://zerogox.com/ethereum/wei_faucet
+
+# add the address of you account and wait about 10 minutes .....
+# You should now have a wallet with some ether in it for gass you can use to pay "miners" 
+# for processing your you transactions.
+
+
+
+https://www.etherchain.org/account/0xf2e5461cd7a1efd2b56a41f086ae0fbd346eca1a#txreceived
+
+
+
+#######################################################################
+# WALLET LOCATION
+# see http://cryptomining-blog.com/5362-how-to-backup-your-ethereum-wallet-and-the-blockchain/
+#
+#  ~/.ethereum/testnet/keystore/
+#######################################################################
+
+# On Linux the blockchain is installed in the users ~/.ethereum/
+#
+# Just like with Bitcoin’s wallet.dat file that contains your wallet address and keys and that you need to backup for safety reasons, 
+# Ethereum also has a similar wallet file that you should have a spare copy of. With Ethereum the wallet file has a bit weird name and 
+# is not just called wallet.dat, but it has essentially the same purpose and the file works essentially the same way as the wallet.dat 
+# with Bitcoin and many other alternative crypto coins. Ethereum’s wallet file is stored in the data directory used by the client 
+# to store the blockchain and other files, the default locations for the datadir on different operating systems are listed below.
+#
+#    Default datadir locations:
+#    – Mac: ~/Library/Ethereum
+#    – Linux: ~/.ethereum
+#    – Windows: %USERPROFILE%\AppData\Roaming\Ethereum
+
+
+
+

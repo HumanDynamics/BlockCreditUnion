@@ -1,0 +1,74 @@
+##########################################################################
+# GENERAL INFO
+##########################################################################
+
+https://www.reddit.com/r/ethereum/comments/3vxvlx/starter_guide_almost_all_the_links_youll_need_to/    <<-----READ THIS
+https://www.reddit.com/r/ethereum/comments/3vxvlx/starter_guide_almost_all_the_links_youll_need_to/
+https://www.reddit.com/r/ethereum/comments/3vxvlx/starter_guide_almost_all_the_links_youll_need_to/
+https://www.reddit.com/r/ethereum/comments/3vxvlx/starter_guide_almost_all_the_links_youll_need_to/
+
+https://github.com/ethereum/webthree-umbrella/releases   <<----- C++ Etherium 
+
+
+
+
+
+##########################################################################
+## CANT CONNECT TO PEERS PROBMEM
+#  see cu_ethereum_setup_networking
+##########################################################################
+
+
+##########################################################################
+# CLI command line interface
+# see cu_ethereum_setup_cli for geth cli
+#
+# /Ethereum-Wallet-linux64-0-7-6/resources/node/geth
+##########################################################################
+
+
+##########################################################################
+# see cu_ethereum_setup_wallet for wallet setup and location etc
+# see http://cryptomining-blog.com/5362-how-to-backup-your-ethereum-wallet-and-the-blockchain/
+##########################################################################
+
+##########################################################################
+# IF YOU HAVE PROBLEMS WITH THE BLOCKCAHIN OR NEED TO MOVE OR BACK IT UP
+# see cu_ethereum_setup_blockchain for blockchain setup and location etc 
+# see http://cryptomining-blog.com/5362-how-to-backup-your-ethereum-wallet-and-the-blockchain/
+##########################################################################
+
+
+##########################################################################
+# see cu_ethereum_setup_exchanging_coins 
+# Bitcion to ether + bitcoin wallet
+# https://www.buy-ether.com/english/manual-ethereum-wallet-installation-and-performing-btc-eth-exchange
+##########################################################################
+
+
+
+##########################################################################
+# see cu_ethereum_setup_exchanging_coins
+# Bitcion to ether + bitcoin wallet
+# https://www.buy-ether.com/english/manual-ethereum-wallet-installation-and-performing-btc-eth-exchange
+##########################################################################
+
+
+##########################################################################
+# GENERAL MINT YOUR OWN COIN
+# SEE  cu_ethereum_setup_mint_your_own_DollarCoin
+##########################################################################
+
+To build your own currancy with a fixed number of coins you need to create a SmartContract for the wallet. This provides 
+governance on those coins fixing their number permenatly. There are a number of steps to do this but the GENERALY if you follow 
+the next tow lines you can create a "Dollar Coin" with a fixed number in circulation.  Of course you will have to change the names
+in the code to DollarCoin.  
+
+https://blog.ethereum.org/2015/12/07/ethereum-in-practice-part-3-how-to-build-your-own-transparent-bank-on-the-blockchain/
+https://blog.ethereum.org/2015/12/03/how-to-build-your-own-cryptocurrency/  <<----- GENERALLY FOLLOW THIS
+
+
+This may also be helpfull
+http://chriseth.github.io/browser-solidity/#gist=21935dc37c5bfbe92e5a&version=soljson-latest.js <<----- another simple token example
+
+

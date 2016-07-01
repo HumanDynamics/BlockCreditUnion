@@ -1,0 +1,69 @@
+
+
+##########################################################################
+# THE WALLET IS NOT CLEAR ABOUT HOW IT SETS UP WALETTS ETC
+# see cu_ethereum_setup_wallet
+#
+##########################################################################
+
+
+
+
+
+##########################################################################
+# THE WALLET WILL NOT SYNCRONIZE WITH PEERS
+# see cu_ethereum_setup_networking
+#
+##########################################################################
+
+This can be a major problem..... if you computers time drifts by more then about 12 seconds
+the wallet will not sync peers and you cat get new blocks
+
+The best thing to do is install a network time server ntp 
+
+## INSTALL AND RUN A TIME SERVER SO YOU CAN SYNC THE BLOCKS
+sudo apt-get install ntp
+sudo nano /etc/ntp.conf
+sudo service ntp restart
+sudo ntpq -c lpeer
+sudo tail -f /var/log/syslog
+sudo ntpq -c lpeer
+
+Do make sure, if you are using a firewall, to open UDP 123
+https://www.youtube.com/watch?v=X_FcdPHH9vo
+
+
+IN THE ADVENT YOU MACHINE IS REALLY SCREWED UP LIKE MY UBUNTO BOX YOU MAY NOT BE ABLE TO GET ntp
+to work because of other conflicts either stuff either a firewall or an older time server....
+
+The SHORT TERM HACK AND FIX, IS TO completly re insall everything... 
+
+
+THER ARE NO GARENTEE HERE DO AT YOU OWN RISK 
+
+IF YOU HAVE ALREDY BEEN USING ETEREUM SAVE YOUR WALLET
+
+Generally SAVE YOUR BLOCKCHAIN SO YOU DONT HAVE TO RELOAD IT in geth
+ ./Ethereum-Wallet-linux64-0-7-6/resources/node/geth/geth  --help
+ ./Ethereum-Wallet-linux64-0-7-6/resources/node/geth/geth  export   {lookup documentation here for detils}
+
+
+rename and "move" your wallet key store   dir
+mv  ~/.ethereum ~/.ethereum_BACKUP
+
+REINSTALL THE ETHEREUM WALLET
+
+THIS SHOULD FIX THE PEER SYNCING PROBLEM
+
+MOVE BACK YOUR WALLET KEYS
+
+mv  ~/.ethereum_BACKUP ~/.ethereum
+
+
+
+See ALSO
+https://github.com/ethereum/go-ethereum/wiki/Connecting-to-the-network
+
+sudo ntpdate -s time.nist.gov
+
+

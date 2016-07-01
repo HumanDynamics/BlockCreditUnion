@@ -1,0 +1,53 @@
+
+
+#################################
+## INSTALL AND RUN A TIME SERVER SO YOU CAN SYNC THE BLOCKS
+#################################
+sudo apt-get install ntp
+sudo nano /etc/ntp.conf
+sudo service ntp restart
+sudo ntpq -c lpeer
+sudo tail -f /var/log/syslog
+sudo ntpq -c lpeer
+
+Do make sure, if you are using a firewall, to open UDP 123
+https://www.youtube.com/watch?v=X_FcdPHH9vo
+
+
+
+
+
+#################################
+## THIS MAY ALSO BE HELPFULL 
+#################################
+
+
+https://github.com/ethereum/go-ethereum/wiki/Connecting-to-the-network
+
+# sudo ntpdate -s time.nist.gov
+
+
+
+#################################
+## CANT CONNECT TO PEERS PROBMEM
+#################################
+THE PROBLE IS EITHER:
+	1) you dont have  network time server running aka ntp
+
+	2) you dont have udp port 30303 open in you firewall AND/OR ROUTER
+
+
+NOTE THIS CAN CAUSE YOU ENDLESS PAIN. DAYS AND DAYS OF PAIN.
+
+AS YOU CAN HAVE UDP PORT 30303 OPEN IN THE SOFWARE FIREWALL AND SEE geth is CONNECTING TO IT BUT
+
+STILL HAVE A PROBLEM WIT YOUR HARDWARE ROUTER .... YOU SHOULD PORT FORWARD that port.
+
+NOTE I BYPASSED THE PROBLEM BY PATCHING THE TCIP WIRE TO DIFFERENT ROUTER.
+
+I KNOW THE PROBME WAS THE HARDWARE ROUTER BE CAUSE WHEN I REBOOTED AND RAN THE WALLET 
+
+IT FOUND THE PEERS NO PROBLEM !!!!!
+
+
+	

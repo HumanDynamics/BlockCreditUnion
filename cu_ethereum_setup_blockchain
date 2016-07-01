@@ -1,0 +1,78 @@
+#######################################################################
+# cu_ethereum_setup_blockchain
+# see http://cryptomining-blog.com/5362-how-to-backup-your-ethereum-wallet-and-the-blockchain/
+# ETHEREUM BLOCKCHAIN LOCATION
+# On Linux the blockchain is installed in the users ~/.ethereum/chaindata
+#
+# Just like with Bitcoin’s wallet.dat file that contains your wallet address and keys and that you need to backup for safety reasons, 
+# Ethereum also has a similar wallet file that you should have a spare copy of. With Ethereum the wallet file has a bit weird name and 
+# is not just called wallet.dat, but it has essentially the same purpose and the file works essentially the same way as the wallet.dat 
+# with Bitcoin and many other alternative crypto coins. Ethereum’s wallet file is stored in the data directory used by the client 
+# to store the blockchain and other files, the default locations for the datadir on different operating systems are listed below.
+#
+#    Default datadir locations:
+#    – Mac: ~/Library/Ethereum
+#    – Linux: ~/.ethereum
+#    – Windows: %USERPROFILE%\AppData\Roaming\Ethereum
+#
+# Export and Import the Ethereum Blockchain
+# If you are moving your Ethereum installation over to a different computer or want to have a copy on another system for solo mining for 
+#example, aside from a copy of the wallet file you may also want to make a copy of the blockchain, so that the geth client will not need 
+#to download the whole thing again from the network. For the moment the Ethereum blockchain is not that big, but as it continues to grow 
+#it can become a very time consuming task to wait for the blockchain to download over the network like it already is with bitcoin for 
+example. So here is how you can also export and then import the Ethereum blockchain should you need to do so.
+
+    Export and Import the Ethereum Blockchain:
+    – Run: geth export blockchain_backup
+    – Copy the blockchain_backup file to the new system (a bit over 60 MB for the moment)
+    – On the new system run: geth import blockchain_backup
+
+#You can also export and import the blockchain data from a geth console mode, however it seems that when ran inside the console it is doing 
+#it much slower than the above method. The commands for the Javascript console are admin.exportChain('blockchain_backup') and 
+#admin.importChain('blockchain_backup'), so you can try with them as well, but the first example should be faster.
+
+
+##################################################
+# Deleting the blockchain 
+##################################################
+# IF you having problems with an outdated chain see
+# http://ethereum.stackexchange.com/questions/2746/ethereum-node-stuck-cant-sync
+# you can delet it by
+# Delete your old copy of the blockchain with the command:
+# rm -rf ~/Library/Ethereum/chaindata
+
+
+##################################################
+# Getting a new the blockchain 
+################################################## 
+# see http://ethereum.stackexchange.com/questions/392/how-can-i-get-a-geth-node-to-download-the-blockchain-quickly
+# From your Ethereum Wallet installation directory, run the command:
+# ./resources/node/geth/geth --fast --cache 1024 --jitvm
+
+
+
+
+##########################################################################
+# RELAOD  blockchain
+# IF YOU HAVE MAJOR PROBLEMS YOU CAN REUMOVE THE KEYS 
+# AND THIS WILL ALLOW YOU AKA FORCE THE WALLET TO  TO INSTALL A NEW BLOCKCHIN
+# ON STARTUP 
+#
+# DONT FOR GET TO COPY BACK YOU KEY DIRECTORY 
+
+
+	
+	DO AT YOUR OWN RISK
+	DO AT YOUR OWN RISK
+        DO AT YOUR OWN RISK
+
+
+# mv  ~/.ethereum/testnet/keystore/ ~/.ethereum/testnet/keystore_OLD
+
+
+
+
+##########################################################################
+
+
+
