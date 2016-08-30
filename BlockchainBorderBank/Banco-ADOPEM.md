@@ -1,6 +1,6 @@
 # BANCA COMUNAL, THE COMMUNITY BANK PRODUCT
  
-This is a program/prdouct was created by Banco ADOPEM and co-developed with Caitlin Stilin-Rooney in 2013-2014 to enable small microenterprises of Haitian descent to gain access to financial services.
+The Community Bank is a program/product was created by Banco ADOPEM and co-developed with Caitlin Stilin-Rooney in 2013-2014 to enable small microenterprises of Haitian descent to gain access to financial services.  The [Blockchain Border Bank project of law.MIT.edu](https://law.mit.edu/BlockchainBorderBank) aims to prototype and test an approach enabling the Community Bank to provide it's members usable and valid identity and enduring access to economic independence. 
 
 Through group lending or Community Banking, operating costs are reduced and entities can provide a large number of credits for very small amounts while serving the most marginalized and vulnerable groups (eg. Displaced populations, refugees, undocumented persons living under the poverty line, etc.) 
 
