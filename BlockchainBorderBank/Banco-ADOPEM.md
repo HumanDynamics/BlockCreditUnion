@@ -129,3 +129,51 @@ administration, collection and track loans are delegated to the Executive Commit
 * Treasurer: Person who collects the money from the rest of the group members and hands it off to the President who then takes the money to the bank 
 
 # FUTURE PRIORITIES
+
+this section is under development
+
+# Diagrams and Flows 
+**Under Development - Notional Initial Drafts**
+
+## Structure 
+
+This chart shows only 3 of the 6 current groups formed at the border. There is a 7th group being formed.
+
+<img width="899" alt="communitybank_orgchart" src="https://github.com/BridgingBanks/GeneralSpecificationsDocumentation/blob/gh-pages/Diagrams/CommunityBank_OrgChart.png?raw=true">
+
+## Financial Flow 
+
+
+In this model the President negotiates loans with the Bank and then disburses to Treasurer who then disburse to group members (this current version does not have the accurate arrows depicting the President disbursing to treasurer. Once members can pay back the loan they bring money to the group meeting and secretary records the collection of all money from treasurer using the Border Bank system. 
+
+The point of this diagram is to track data points and flow through the system however there are still some aspects that need to be verified .
+
+Functions allocated to the role "President" include:
+* Guarentor of the Loans
+* Approve Individual Members
+
+
+![functionaldiagram_financialdataflow](https://github.com/BridgingBanks/GeneralSpecificationsDocumentation/blob/gh-pages/Diagrams/FunctionalDiagram_FinancialDataFlow.jpeg)
+
+
+
+## Work Flow
+
+Basic Community Bank workflow 
+
+ADOPEM bank loans money to the President of each group. The president then uses the group treasurer to disburse sub-loans to the group members. Every 15 days members meet and pay part of their loan back to the treasurer who then takes the money back to the Presidnet who then pays back the loan to the bank. 
+
+![functionaldiagram_financialworkflow](https://github.com/BridgingBanks/GeneralSpecificationsDocumentation/blob/gh-pages/Diagrams/FunctionalDiagram_FinancialWorkflow.jpeg)
+
+
+
+## Conceptual Future State Component and Functional Diagram
+
+This is a very high level and notional view of some key systems that could be part of a more mature and future state architecture.
+
+The functionality is anticipated to include Identity (including the capacity to uniquely identify each accout holder, to authenticate that identity and to manage authorizations granted by that identity).  
+
+![communitytrustbank](https://github.com/BridgingBanks/GeneralSpecificationsDocumentation/blob/gh-pages/Diagrams/CommunityTrustBank.jpg)
+
+
+
